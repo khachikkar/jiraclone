@@ -10,6 +10,7 @@ class Register extends React.Component {
       fullname: "",
       email: "",
       password: "",
+      loading: false
     };
   }
 
@@ -21,16 +22,27 @@ class Register extends React.Component {
     });
   };
 
-  handleregister = (e) => {
+  handleregister = async (e) => {
     e.preventDefault();
 
+    this.setState({
+        loading: true
+    })
     const { email, password } = this.state;
 
-    createUserWithEmailAndPassword(auth, email, password);
+   try{
+   await createUserWithEmailAndPassword(auth, email, password);
+   }catch{
+console.log("error")
+   }finally{
+    this.setState({
+        loading: false
+    })
+   }
   };
 
   render() {
-    console.log(this.state);
+    const {loading} =this.state
 
     return (
       <div>
@@ -70,7 +82,7 @@ class Register extends React.Component {
 
             <br />
             <br />
-            <button>Register</button>
+            <button>{loading ? "Loading..." : "Register"}</button>
           </form>
         </fieldset>
       </div>
