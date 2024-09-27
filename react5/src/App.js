@@ -1,4 +1,5 @@
 import './App.css';
+import Register from './pages/register';
 
 
 
@@ -6,7 +7,7 @@ function App() {
   return (
     <div className="App">
 
-hello
+<Register />
     </div>
   );
 }
